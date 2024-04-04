@@ -1,0 +1,189 @@
+<h1 class="heading">Form Validation</h1>
+
+<div class="user-form">
+  <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()">
+    
+    <!--Full Name-->
+    <div class="form-group">
+      <label>Full Name</label><br>
+      <input
+        type="text"
+        class="form-control"
+        name="fullname"
+        [(ngModel)]="user.fullname"
+        required
+        #fullname="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && fullname.errors }"
+      />
+      @if (f.submitted && fullname.errors){
+      <div class="invalid-feedback">
+        @if (fullname.errors['required']){
+        <div>fullname is required</div>
+        }
+      </div>
+      }
+    </div>
+
+    <!--Username-->
+
+  <div class="form-group">
+    <label>Username</label><br>
+      <input type="text"
+      class="form-control" 
+      name="username" 
+      [(ngModel)]="user.username" 
+      required 
+      minlength="6" 
+      maxlength="20" 
+      pattern="[a-zA-Z]+" 
+      #username="ngModel" 
+      [ngClass]="{ 'is-invalid': f.submitted && username.errors}"
+      />
+      @if (f.submitted && username.errors) {
+        <div class="invalid-feedback">
+        @if (username.errors['required']) {
+          <div>Username is required</div>
+        } @if (username.errors['minlength']) {
+          <div>Username must be atleast 6 characters</div>
+        } @if (username.errors['maxlength']) {
+          <div>Username must be atmost 20 characters</div>
+        }
+      </div>
+      }
+  </div>
+
+    <!--Email-->
+
+  <div class="form-group">
+    <label>Email</label><br>
+    <input type="email" 
+    class="form-control" 
+    name="email" 
+    [(ngModel)]="user.email" 
+    required 
+    email 
+    #email="ngModel" 
+    [ngClass]="{ 'is-invalid': f.submitted && email.errors}"
+    />
+    @if (f.submitted && email.errors) {
+      <div class="invalid-feedback">
+        @if (email.errors['required']) {
+          <div>Email is required</div>
+        } @if (email.errors['email']) {
+          <div>Email is invalid</div>
+        }
+      </div>
+    }
+  </div>
+
+    <!--Address-->
+
+  <div class="form-group">
+    <label>Address</label><br>
+    <input type="text" 
+    class="form-control" 
+    name="address" 
+    [(ngModel)]="user.address" 
+    required 
+    #address="ngModel" 
+    [ngClass]="{ 'is-invalid': f.submitted && address.errors}"
+    />
+    @if (f.submitted && address.errors) {
+      <div class="invalid-feedback">
+        @if (address.errors['required']) {
+          <div>Address is required</div>
+        }
+      </div>
+    }
+  </div>
+
+    <!--DateofBirth-->
+
+  <div class="form-group">
+    <label>Date of Birth</label><br>
+    <input type="date"
+     class="form-control" 
+     name="dateOfBirth" 
+     [(ngModel)]="user.dateOfBirth" 
+     required 
+     #dateOfBirth="ngModel"
+     [ngClass]="{ 'is-invalid': f.submitted && dateOfBirth.errors}"
+     />
+    @if (f.submitted && dateOfBirth.errors) {
+      <div class="invalid-feedback">
+        @if (dateOfBirth.errors['required']) {
+          <div>Date of Birth is required</div>
+        }
+      </div>
+    }
+  </div>
+
+  <!--Password-->
+
+  <div class="form-group">
+    <label>Password</label><br>
+    <input type="pass"
+    class="form-control"
+    name="password"
+    [(ngModel)]="user.password"
+    #password="ngModel"
+    required
+    minlength="6"
+    maxlength="20"
+    pattern="^(?=.[a-zA-Z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%*?&]{6,20}$"
+    [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+    />
+
+    @if (f.submitted && password.errors) {
+      <div class="invalid-feedback">
+        @if (password.errors['required']){
+          <div>Password is required</div>
+        } @if (password.errors['minlength']){
+          <div>Password atleast 6 characters</div>
+        } @if (password.errors['maxlength']){
+          <div>Password must be at most 20 characters</div>
+        } @if (password.errors['pattern']){
+          <div>Password must contain  Alphabets, Numbers, and Special characters</div>
+        }
+      </div>
+    }
+  </div>
+
+  <!--Phone Number-->
+
+  <div class="form-group">
+    <label>Phone Number</label><br>
+    <input type="tel"
+    class="form-control"
+    name="phoneNumber"
+    [(ngModel)]="user.phoneNumber"
+    #phoneNumber="ngModel"
+    required
+    minlength="10"
+    maxlength="10"
+    pattern="^[0-9]{10,10}$"
+    [ngClass]="{ 'is-invalid': f.submitted && phoneNumber.errors }"
+    />
+
+    @if (f.submitted && phoneNumber.errors) {
+      <div class="invalid-feedback">
+        @if (phoneNumber.errors['required']){
+          <div>phoneNumber is required</div>
+        } @if (phoneNumber.errors['minilength']){
+          <div>phoneNumber atleast 10 characters</div>
+        } @if (phoneNumber.errors['maxlength']){
+          <div>phoneNumber must be at most 10 characters</div>
+        } @if (phoneNumber.errors['pattern']){
+          <div>phoneNumber must be in Number</div>
+        }
+      </div>
+    }
+  </div>
+
+    <!--Button-->
+    <div class="form-group">
+      <button type="submit" class="button">Save</button>
+    </div>
+
+  </form>
+</div>
